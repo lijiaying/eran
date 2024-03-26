@@ -18,8 +18,8 @@
 import sys
 import os
 cpu_affinity = os.sched_getaffinity(0)
-sys.path.insert(0, '../ELINA/python_interface/')
-sys.path.insert(0, '../deepg/code/')
+sys.path.insert(0, '../../ELINA/python_interface/')
+sys.path.insert(0, '../../deepg/code/')
 import torch
 import numpy as np
 from eran import ERAN
