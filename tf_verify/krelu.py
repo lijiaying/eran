@@ -58,7 +58,7 @@ def generate_linexpr0(offset, varids, coeffs):
 
 class KAct:
     def __init__(self, input_hrep, approx=True):
-        assert KAct.type in ["ReLU", "Tanh", "Sigmoid"]
+        assert KAct.type in ["ReLU", "Tanh", "Sigmoid", "LeakyReLU"]
         self.k = len(input_hrep[0]) - 1
         self.input_hrep = np.array(input_hrep)
 
@@ -67,6 +67,8 @@ class KAct:
                 self.cons = fkrelu(self.input_hrep)
             else:
                 self.cons = krelu_with_cdd(self.input_hrep)
+        elif KAct.type == "LeakyReLU":
+            self.cons = kleakyrelu_with_cdd(self.input_hrep, alpha=0.01)
         elif not approx:
             assert False, "not implemented"
         elif KAct.type == "Tanh":
